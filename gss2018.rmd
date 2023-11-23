@@ -46,13 +46,36 @@ both variables are categorical so we use cat~cat.
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+barchartGC(~OWNGUN + CAPPUN,data=GSSdata)
+barchartGC(~OWNGUN + CAPPUN,data=GSSdata, type-"percent")
+```
+the graph shows.
+
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+table1 <- xtabs(~OWNGUN + CAPPUN, data=GSSdata)
+rowPerc(table1)
+colPerc(table1)
+```
+this summary shows those who own guns.
+
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+chi-squared test p-value is 0.02022, less than 0.05, so we reject the null hypothesis.
+
+Fisher exact p-value is 0.01651, so we conclude that there is a relationship between gun ownership and opinion on capital punishment. people who own a gun are on average 2.3 times more likely to favor capital punishment than those who do not own a gun.
 
 #  Question 2
 
